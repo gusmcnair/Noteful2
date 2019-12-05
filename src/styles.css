@@ -1,0 +1,102 @@
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    width: 600px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.sidebar {
+    width: 30%;
+}
+
+.main-page {
+    width: 70%;
+}
+
+header {
+    text-align: center;
+}
+
+h1 a {
+    color: white;
+    font-size: 3rem;
+    text-decoration: none;
+}
+
+h1 a:hover {
+    color: yellow;
+}
+
+h2:hover {
+    color: yellow;
+}
+
+* {
+    color: white;
+}
+
+html {
+    background-color: darkblue;
+
+}
+
+h3 {
+    text-align: center;
+}
+
+li {
+    background-color: midnightblue;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 10px;
+}
+
+.remove {
+    font-weight: bold;
+}
+
+.remove:hover {
+    color: yellow;
+}
+
+.add-item {
+    text-align: center;
+    background: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    margin-top: 20px;
+}
+
+.item-container {
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.add-item p {
+    color: darkblue;
+    padding-top: 10px;
+}
+
+.add-item:hover {
+    background: yellow;
+}
+
+.selectedLink li {
+    background-color: darkblue;
+}
+
+button {
+    font-size: 1rem;
+    padding-top: 0px;
+    margin-top: 0px;
+}

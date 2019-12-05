@@ -1,16 +1,4 @@
-import React from 'react';
-import { Route, Switch } from "react-router-dom";
-import HeaderBanner from './header-banner';
-import NotePage from './notepage.js';
-import FolderPage from './folderpage.js';
-import MainPage from './mainpage.js';
-import NoteSidebar from './notesidbar.js';
-import MainSidebar from './mainsidebar.js';
-import './styles.css';
-import NOTES from './notes.js';
-
-class App extends React.Component{
-  state = {
+export default {
     "folders": [
       {
         "id": "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
@@ -125,32 +113,4 @@ class App extends React.Component{
         "content": "Veritatis porro minima perspiciatis. Repellat veniam quo iste ut. Iusto voluptas quae quibusdam. Odit neque iusto cupiditate iste quam. Fuga itaque aut praesentium ullam saepe ut et vero.\n \rQuisquam doloremque molestiae. Enim rerum dolorem et velit itaque magnam laborum. Aut officiis porro.\n \rQuae eum eaque error. Sed itaque ipsam nam provident aut voluptate. Perferendis repudiandae sequi laudantium est est animi eum. Unde alias et doloribus est hic et. Sed distinctio incidunt maiores aut voluptatibus et omnis mollitia fugit."
       }
     ]
-  }
-  
-render(){  return (
-    <>
-    <HeaderBanner />
-    <main className='App'>
-      <Switch>
-        <section className="sidebar">
-          <Route exact path="/" render={props =>
-          (<MainSidebar {...NOTES}/>)}/>
-          <Route path="/folder/:folderId" component={MainSidebar} />
-          <Route path="/notes" component={NoteSidebar} />
-        </section>
-      </Switch>
-      <Switch>
-        <section className="main-page">
-          <Route exact path="/" render={props =>
-          (<MainPage {...NOTES}/>)} />
-         <Route path="/folder/:folderId" component={FolderPage} />
-         <Route path="/notes/:noteId" component={NotePage} />
-        </section>
-      </Switch>
-    </main>
-    </>
-  );
 }
-}
-
-export default App;
