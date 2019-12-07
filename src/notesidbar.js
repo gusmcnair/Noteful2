@@ -1,16 +1,20 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import NOTES from './notes.js';
 import './styles.css';
+import NotesContext from './NOTES_context.js';
+
 
 
 class NoteSidebar extends React.Component {
+    static contextType = NotesContext;
+
     render(){
+        const contextValue = this.context;
         const noteInfo = (this.props.location.pathname).replace(/\/notes\//, "");
         let thisFolderId = "";
-        for(let i = 0; i < NOTES.notes.length; i++){if (noteInfo === NOTES.notes[i].id){thisFolderId = NOTES.notes[i].folderId}}
+        for(let i = 0; i < contextValue.notes.length; i++){if (noteInfo === contextValue.notes[i].id){thisFolderId = contextValue.notes[i].folderId}}
         let folderName = "";
-        for(let i = 0; i < NOTES.folders.length; i ++){if (thisFolderId === NOTES.folders[i].id){folderName = NOTES.folders[i].name}}
+        for(let i = 0; i < contextValue.folders.length; i ++){if (thisFolderId === contextValue.folders[i].id){folderName = contextValue.folders[i].name}}
         return(
             <div>
              <div className="item-container">

@@ -60,10 +60,13 @@ li {
 
 .remove {
     font-weight: bold;
+    background-color: midnightblue;
+    padding: 7px;
 }
 
 .remove:hover {
-    color: yellow;
+    background-color: yellow;
+    color: midnightblue;
 }
 
 .add-item {

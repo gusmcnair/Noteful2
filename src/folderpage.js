@@ -1,16 +1,18 @@
 import React from 'react';
 import NoteDisplay from './notedisplay'
 import './styles.css';
-import NOTES from './notes.js';
+import NotesContext from './NOTES_context.js';
 
 
 
 
 class FolderPage extends React.Component {
+    static contextType = NotesContext;
 
-    render() {
+    render(){
+        const contextValue = this.context;
         const folderId = (this.props.location.pathname).replace(/\/folder\//, "")
-        const thisProps = NOTES.notes.filter(singleNote => singleNote.folderId === folderId)
+        const thisProps = contextValue.notes.filter(singleNote => singleNote.folderId === folderId)
         return (
             thisProps.map((singleNote) =>
                 <ul>

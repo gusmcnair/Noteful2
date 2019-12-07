@@ -1,21 +1,21 @@
 import React from 'react';
 import Folder from './folder';
 import './styles.css';
-import NOTES from './notes.js';
+import NotesContext from './NOTES_context.js';
 
 
 export default class MainSidebar extends React.Component {
-
+    static contextType = NotesContext;
 
     render(){
+        const contextValue = this.context
         return(
             <ul className="listslist">
-                {NOTES.folders.map((singleFolder) =>
+                {contextValue.folders.map((singleFolder) =>
                     <Folder
                         key={singleFolder.id}
                         id={singleFolder.id}                            
                         name={singleFolder.name}
-                        notes={NOTES.notes}
                     />
                 )}
                 <div className="item-container">

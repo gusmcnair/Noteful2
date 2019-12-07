@@ -1,17 +1,19 @@
 import React from 'react';
 import './styles.css'
-import NOTES from './notes.js';
 import NoteDisplay from './notedisplay'
+import NotesContext from './NOTES_context.js';
 
 
 export default class NotePage extends React.Component {
+    static contextType = NotesContext;
+
     render(){
+        const contextValue = this.context.notes;
         const noteInfo = (this.props.location.pathname).replace(/\/notes\//, "")
-        const thisProps = (NOTES.notes)
         let thisNote = ""
-        for(let i = 0; i < thisProps.length; i ++){
-            if (thisProps[i].id === noteInfo){
-                thisNote = thisProps[i];
+        for(let i = 0; i < contextValue.length; i ++){
+            if (contextValue[i].id === noteInfo){
+                thisNote = contextValue[i];
             }
         }
         return(
