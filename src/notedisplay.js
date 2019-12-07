@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './styles.css';
 import NotesContext from './NOTES_context.js';
 
 
-export default class NoteDisplay extends React.Component{
+class NoteDisplay extends React.Component{
 
     handleRemoveClick(noteId, deleteNote){
-        console.log(`Remove was clicked for note ${noteId}.`)
         fetch(`http://localhost:9090/notes/${noteId}`, {
             method: 'DELETE'
     })
@@ -31,12 +31,16 @@ export default class NoteDisplay extends React.Component{
                 </Link>
                 <p>Modified {this.props.modified.replace(/T.*$/,"")}</p>
                 <button className="remove" onClick={() => {
+                    if(this.props.history.location.pathname.charAt(1) === "n"){this.props.history.goBack()}
                     this.handleRemoveClick(
                         this.props.id, 
-                        this.context.deleteNote)
+                        context.deleteNote,
+                        )
                 }}>Remove</button>
             </li> ))}
             </NotesContext.Consumer>
         )
     }
 }
+
+export default withRouter(NoteDisplay);

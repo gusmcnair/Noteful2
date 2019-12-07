@@ -34,7 +34,6 @@ class App extends React.Component{
 deleteNote = (noteId) => {
   const newNoteList = this.state.notes.filter(note =>
     note.id !== noteId)
-    console.log(newNoteList)
     this.setState({
       notes: newNoteList,
     })
@@ -64,7 +63,6 @@ render(){
     folders: this.state.folders,
     deleteNote: this.deleteNote,
   }  
-  console.log(contextValue)
   return (
     <>
     <HeaderBanner />
@@ -83,9 +81,7 @@ render(){
           <Route exact path="/" render={props =>
           (<MainPage {...contextValue}/>)} />
 
-         <Route path="/notes/:folderId" render={props =>
-         (<FolderPage {...contextValue} />)}/>
-         
+         <Route path="/folder/:folderId" component={FolderPage} />
          <Route path="/notes/:noteId" component={NotePage} />
         </section>
       </Switch>

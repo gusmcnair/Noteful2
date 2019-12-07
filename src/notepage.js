@@ -24,6 +24,7 @@ export default class NotePage extends React.Component {
                         id={thisNote.id}
                         name={thisNote.name}
                         modified={thisNote.modified}
+                        
                         />
                         <p>{thisNote.content}</p>
                         </ul>
