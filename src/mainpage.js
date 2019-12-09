@@ -1,8 +1,10 @@
 import React from 'react';
 import NoteDisplay from './notedisplay'
+import { Link } from 'react-router-dom';
 import './styles.css'
 
 class MainPage extends React.Component {
+
     render(){
         return(
             <ul className="notes-list">
@@ -16,7 +18,12 @@ class MainPage extends React.Component {
                         />
                 )}
                 <div className="item-container">
-                <div className="add-item"><p>+ Note</p></div>
+                <Link className="add-item"
+                    to={{
+                        pathname: "/addnewnote"
+                    }}>
+                    <p>+ Note</p>
+                </Link>
                 </div>
             </ul>
         );

@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import './styles.css';
 import NotesContext from './NOTES_context.js';
+import PropTypes from 'prop-types';
 
 
 class NoteDisplay extends React.Component{
+
 
     handleRemoveClick(noteId, deleteNote){
         fetch(`http://localhost:9090/notes/${noteId}`, {
@@ -19,6 +21,7 @@ class NoteDisplay extends React.Component{
     }
     
     render(){
+
         return(
             <NotesContext.Consumer>
             {(context => (
@@ -29,7 +32,7 @@ class NoteDisplay extends React.Component{
                     }}>
                     <h2>{this.props.name}</h2>
                 </Link>
-                <p>Modified {this.props.modified.replace(/T.*$/,"")}</p>
+                <p>Modified {this.props.modified[10] === "T" ? this.props.modified.replace(/T.*$/,"") : this.props.modified}</p>
                 <button className="remove" onClick={() => {
                     if(this.props.history.location.pathname.charAt(1) === "n"){this.props.history.goBack()}
                     this.handleRemoveClick(
@@ -42,5 +45,11 @@ class NoteDisplay extends React.Component{
         )
     }
 }
+
+NoteDisplay.propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    modified: PropTypes.string.isRequired,
+  };
 
 export default withRouter(NoteDisplay);

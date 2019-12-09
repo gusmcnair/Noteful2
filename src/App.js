@@ -8,6 +8,11 @@ import NoteSidebar from './notesidbar.js';
 import MainSidebar from './mainsidebar.js';
 import './styles.css';
 import NotesContext from './NOTES_context.js';
+import AddNewFolder from './newfolder.js';
+import AddNewNote from './newnote.js';
+import MainSectionError from './mainsectionerror.js';
+import SidebarSectionError from './sidebarsectionerror.js';
+
 
 class App extends React.Component{
 
@@ -15,9 +20,10 @@ class App extends React.Component{
     super();
     this.state = {
     "folders": [],
-    "notes": []
+    "notes": [],
   }     
 };
+
 
   handleFoldersSetState = (apiFolders) => {
     this.setState({
@@ -38,6 +44,21 @@ deleteNote = (noteId) => {
       notes: newNoteList,
     })
 }
+
+addFolder = (response) => {
+  const newFolderList = this.state.folders.concat({id: response.id, name: response.name})
+  this.setState({
+    folders: newFolderList
+  })
+    } 
+  
+addNote = (response) => {
+  const newNoteList = this.state.notes.concat({id: response.id, name: response.name, modified: response.modified, folderId: response.folderId, content: response.content})
+  this.setState({
+    notes: newNoteList
+  })
+}
+  
 
 componentDidMount(){
   fetch("http://localhost:9090/folders")
@@ -62,6 +83,8 @@ render(){
     notes: this.state.notes,
     folders: this.state.folders,
     deleteNote: this.deleteNote,
+    addFolder: this.addFolder,
+    addNote: this.addNote,
   }  
   return (
     <>
@@ -70,19 +93,26 @@ render(){
       <NotesContext.Provider value={contextValue}>
       <Switch>
         <section className="sidebar">
+        <SidebarSectionError>
           <Route exact path="/" render={props =>
           (<MainSidebar {...contextValue}/>)}/>
           <Route path="/folder/:folderId" component={MainSidebar} />
           <Route path="/notes" component={NoteSidebar} />
+          <Route path="/addnewfolder" component={MainSidebar} />
+          <Route path="/addnewnote" component={MainSidebar} />
+          </SidebarSectionError>
         </section>
       </Switch>
       <Switch>
         <section className="main-page">
+        <MainSectionError>
           <Route exact path="/" render={props =>
           (<MainPage {...contextValue}/>)} />
-
          <Route path="/folder/:folderId" component={FolderPage} />
          <Route path="/notes/:noteId" component={NotePage} />
+         <Route path="/addnewfolder" component={AddNewFolder} />
+         <Route path="/addnewnote" component={AddNewNote} />
+         </MainSectionError>
         </section>
       </Switch>
       </NotesContext.Provider>

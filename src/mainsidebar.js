@@ -2,15 +2,26 @@ import React from 'react';
 import Folder from './folder';
 import './styles.css';
 import NotesContext from './NOTES_context.js';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
-export default class MainSidebar extends React.Component {
+class MainSidebar extends React.Component {
     static contextType = NotesContext;
+
+    checkPage(){
+        if(this.props.history.location.pathname !== "/"){
+            return (<div className="item-container">
+            <button onClick={this.props.history.goBack} className="add-item"><p> &lt; Back </p></button>
+            </div>)
+        }
+    }
 
     render(){
         const contextValue = this.context
         return(
             <ul className="listslist">
+                {this.checkPage()}
                 {contextValue.folders.map((singleFolder) =>
                     <Folder
                         key={singleFolder.id}
@@ -19,10 +30,18 @@ export default class MainSidebar extends React.Component {
                     />
                 )}
                 <div className="item-container">
-                <div className="add-item"><p>+ Folder</p></div>
+                <Link 
+                    className="add-item"
+                        to={{ 
+                            pathname: "/addnewfolder"
+                    }}>
+                        <p>+ Folder</p>
+                </Link>
                 </div>
             </ul>
 
         );
     }
 }
+
+export default withRouter(MainSidebar);
