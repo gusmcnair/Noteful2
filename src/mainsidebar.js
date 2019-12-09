@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Folder from './folder';
 import './styles.css';
 import NotesContext from './NOTES_context.js';
@@ -20,8 +20,9 @@ class MainSidebar extends React.Component {
     render(){
         const contextValue = this.context
         return(
+            <Fragment>
+            {this.checkPage()}
             <ul className="listslist">
-                {this.checkPage()}
                 {contextValue.folders.map((singleFolder) =>
                     <Folder
                         key={singleFolder.id}
@@ -29,7 +30,8 @@ class MainSidebar extends React.Component {
                         name={singleFolder.name}
                     />
                 )}
-                <div className="item-container">
+            </ul>
+            <div className="item-container">
                 <Link 
                     className="add-item"
                         to={{ 
@@ -38,8 +40,7 @@ class MainSidebar extends React.Component {
                         <p>+ Folder</p>
                 </Link>
                 </div>
-            </ul>
-
+            </Fragment>
         );
     }
 }

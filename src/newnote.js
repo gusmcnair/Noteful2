@@ -73,8 +73,12 @@ export default class AddNewNote extends React.Component {
         .catch(err => console.log(err));
         this.noteName.current.value = ""; 
         this.noteBody.current.value = ""; 
+        this.noteName.current.focus();
     }
 
+    componentDidMount(){
+        this.noteName.current.focus()
+    }
 
     render(){
         const noteNameError = this.validateNoteName();
@@ -85,11 +89,11 @@ export default class AddNewNote extends React.Component {
                 {(context => (
                     <form onSubmit={ e => this.handleSubmit(e, context.addNote)}>
                         <label htmlFor="note-name">Note Name</label>
-                        <input name="note-name" id="note-name" type="text" ref={this.noteName} onChange={e => this.updateNoteName(e.target.value)}/>
+                        <input name="note-name" id="note-name" type="text" aria-label="Name for note" aria-required="true" aria-describedby="note-name-explain" ref={this.noteName} onChange={e => this.updateNoteName(e.target.value)}/>
                         <label htmlFor="note-body">Note Contents</label>
-                        <textarea rows="5" name="note-body" id="note-body" ref={this.noteBody} onChange={e => this.updateNoteContents(e.target.value)}/>
+                        <textarea rows="5" name="note-body" id="note-body" aria-label="Body copy for note" aria-required="true" aria-describedby="note-contents-explain" ref={this.noteBody} onChange={e => this.updateNoteContents(e.target.value)}/>
                         <label htmlFor="note-folder">Folder</label>
-                        <select name="note-folder" id="note-folder" type="select" ref={this.noteFolder} onChange={e => this.updateFolder(e.target.value)}>
+                        <select name="note-folder" id="note-folder" type="select" aria-label="Folder to place note in" aria-required="false" ref={this.noteFolder} onChange={e => this.updateFolder(e.target.value)}>
                             {this.context.folders.map((folder) => 
                                 <option>
                                     {folder.name}
@@ -97,8 +101,8 @@ export default class AddNewNote extends React.Component {
                             )}
                         </select>
                         <button name="submit-button" disabled={this.validateNoteName() || this.validateNoteContents()} id="submit-button">Submit</button>
-                        <p>{noteNameError}
-                        <br/>{noteContentsError}</p>
+                        <p id="note-name-explain">{noteNameError}</p>
+                        <p id="note-contents-explain">{noteContentsError}</p>
                     </form>
                 ))}
             </NotesContext.Consumer>

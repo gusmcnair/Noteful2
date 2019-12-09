@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import './styles.css';
@@ -23,9 +23,10 @@ class NoteDisplay extends React.Component{
     render(){
 
         return(
+            <li>
             <NotesContext.Consumer>
             {(context => (
-            <li>
+            <Fragment>
                 <Link to={{
                     pathname: `/notes/${this.props.id}`,
                     allInfo: this.props.all,
@@ -40,8 +41,10 @@ class NoteDisplay extends React.Component{
                         context.deleteNote,
                         )
                 }}>Remove</button>
-            </li> ))}
+            
+            </Fragment> ))}
             </NotesContext.Consumer>
+            </li>
         )
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import NoteDisplay from './notedisplay'
 import { Link } from 'react-router-dom';
 import './styles.css'
@@ -7,6 +7,7 @@ class MainPage extends React.Component {
 
     render(){
         return(
+            <Fragment>
             <ul className="notes-list">
                 {this.props.notes.map((SingleNote) =>
                     <NoteDisplay 
@@ -17,6 +18,7 @@ class MainPage extends React.Component {
                         all={SingleNote}
                         />
                 )}
+                </ul>
                 <div className="item-container">
                 <Link className="add-item"
                     to={{
@@ -25,7 +27,7 @@ class MainPage extends React.Component {
                     <p>+ Note</p>
                 </Link>
                 </div>
-            </ul>
+                </Fragment>
         );
     }
 }

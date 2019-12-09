@@ -42,7 +42,12 @@ export default class AddNewFolder extends React.Component {
         .catch(err => console.log(err));
         this.createFolder.current.value = "";
         this.setState({foldername: {value: ""}});
+        this.createFolder.current.focus()
     }
+
+componentDidMount(){
+    this.createFolder.current.focus()
+}
 
 render(){
 
@@ -53,14 +58,14 @@ render(){
             {(context => (
         <form onSubmit={e => this.handleSubmit(e, context.addFolder)}>
             <label htmlFor="create-folder">Create Folder</label>
-            <input name="create-folder" id="create-folder" type="text" onChange={e => this.updateFolderName(e.target.value)} ref={this.createFolder}/>
+            <input name="create-folder" id="create-folder" type="text" aria-label="Name of folder" aria-required="true" aria-describedby="required-explain" onChange={e => this.updateFolderName(e.target.value)} ref={this.createFolder}/>
             <button 
                 disabled={this.validateFolderName()} 
                 name="submit-button" 
                 id="submit-button">
                     Submit
             </button>
-            <p>{folderError}</p>
+            <p id ="required-explain">{folderError}</p>
         </form>
         ))}
         </NotesContext.Consumer>

@@ -16,16 +16,17 @@ export default class Folder extends React.Component {
             return total;
         })
         return (
-            <NavLink to={{
-                pathname: `/folder/${this.props.id}`
-            }}
-                activeClassName="selectedLink"
-            >
-                <li>
-                    <h2>{this.props.name}</h2>
-                    <p>{total}</p>
-                </li>
-            </NavLink>
+            <li>
+                <NavLink to={{
+                    pathname: `/folder/${this.props.id}`
+                }}
+                    activeClassName="selectedLink"
+                >
+                <h2>{this.props.name}</h2>
+                <p>{total}</p>
+                    </NavLink>
+                </li >
+     
 
         )
     }
@@ -34,5 +35,5 @@ export default class Folder extends React.Component {
 Folder.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-  };
+};
 

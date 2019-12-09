@@ -17,7 +17,6 @@ export default class NotePage extends React.Component {
             }
         }
         return(
-            <div>
                 <ul>
                     <NoteDisplay 
                         key={thisNote.id}
@@ -28,7 +27,6 @@ export default class NotePage extends React.Component {
                         />
                         <p>{thisNote.content}</p>
                         </ul>
-            </div>
         );
     }
 }
